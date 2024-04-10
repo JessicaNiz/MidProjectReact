@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { getAllUsers } from "./utils"
-import UserComp from "./user";
+
 import axios from "axios"
 
 
