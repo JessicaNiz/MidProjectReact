@@ -6,7 +6,7 @@ import TodosComp from "./todos";
 import { all } from "axios";
 
 
-function UserCompCopy({ user, callback }) 
+function UserCompCopy({ user, callbackUpdate, callbackDelete }) 
 {
   const [todos, setTodos] = useState([]);
   const [uncompleted, setUncompleted] = useState([]);
@@ -73,9 +73,9 @@ function UserCompCopy({ user, callback })
         Zip Code <input type="text" defaultValue={user.address.zipcode} onChange={(e) => setUpdatedUser({...updatedUser, address: {...updatedUser.address, zipcode: e.target.value}})} /> <br />
       </div>}
 
-      <button onClick={() =>callback({...updatedUser})}>Update</button>
+      <button onClick={() =>callbackUpdate({...updatedUser})}>Update</button>
       &nbsp;
-      <button>Delete</button>
+      <button onClick={() =>callbackDelete(user.id)}>Delete</button>
 
 
 

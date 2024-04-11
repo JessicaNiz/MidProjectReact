@@ -58,6 +58,15 @@ function App() {
 
   }
 
+  const getDeletedUserFromChild = async (childValue) => {
+    const usersCopy=[...users]
+    const index=usersCopy.findIndex(user =>user.id===childValue);
+    usersCopy.splice(index,1);
+    setUsers(usersCopy)
+    const {data } = await axios.delete(`https://jsonplaceholder.typicode.com/users/${childValue}`);
+    console.log("delete user server response", data)
+  }
+
   return (
     <div style={{ border: '1px solid black', borderRadius: '50px', alignItems: 'center', width: "150%" }}>
       Search&nbsp;&nbsp;  <input type="text" onChange={handleChange} />
@@ -73,13 +82,8 @@ function App() {
           user.email.toLowerCase().includes(searchText.toLowerCase())
         ).map((user) => {
 
-          // <UserComp key={user.id}
-
-          //   userId={user.id} userName={user.name} userEmail={user.email}
-          //   userAdress={user.address} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />)
-
           return <UserCompCopy key={user.id}
-            user={user} callback={getUpdatedUserFromChild} />
+            user={user} callbackUpdate={getUpdatedUserFromChild} callbackDelete={getDeletedUserFromChild} />
         })
 
       }
