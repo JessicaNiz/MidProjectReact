@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { getAllUsers } from "./utils"
 
 import axios from "axios"
+import UserCompCopy from "./userCopy";
 
 function App() {
   // const [originalUsers, setOriginalUsers] = useState([])
@@ -10,20 +11,25 @@ function App() {
 
   //for every render will fecth the users data from the server
 
+  useEffect(() => {
   const fetchUsers = async () => {
-    const { usersArray } = await getAllUsers();
+    const { data } = await getAllUsers();
+    console.log("data from server", data);
     // prune users attributes
-    const myUsersArray = usersArray.map(user => ({
+    const myUsersArray = data.map(user => ({
       id: user.id,
       name: user.name,
       email: user.email,
       address: user.address
     }));
-
+    console.log("myUsersArray", myUsersArray);
     setUsers(myUsersArray);
   };
+     fetchUsers();
 
-  useEffect(() => { fetchUsers(); }, [])
+  }, [])
+
+  console.log("user state", users)
 
 
   const handleChange = (e) => {
@@ -31,23 +37,13 @@ function App() {
     // filterUsers();
   };
 
-  // const filterUsers = () => {
-  //   if (searchText.trim() === '') {
-  //     setUsers(originalUsers);
-  //   }
-  //   const filteredUsers = originalUsers.filter(user =>
-  //   user.name.toLowerCase().includes(searchText.toLowerCase()) ||
-  //   user.email.toLowerCase().includes(searchText.toLowerCase())
-  //   );
-  //   setUsers(filteredUsers);
-  // };
 
 
-  // //console log users data for very change to users
-  //   useEffect(() => {
-  //     console.log("users",users);
-  //     console.log("print userData", usersData);
-  //   }, [users])
+
+  //console log users data for very change to users
+    useEffect(() => {
+      console.log("users",users);
+    }, [users])
 
 
 
@@ -72,19 +68,19 @@ function App() {
 
 
         // users.map((user) => <UserComp key={user.id} user={user} />)
-        users.filter(user => 
+        users.filter(user =>
           user.name.toLowerCase().includes(searchText.toLowerCase()) ||
           user.email.toLowerCase().includes(searchText.toLowerCase())
-          ).map((user) => {
+        ).map((user) => {
 
-            // <UserComp key={user.id}
+          // <UserComp key={user.id}
 
-            //   userId={user.id} userName={user.name} userEmail={user.email}
-            //   userAdress={user.address} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />)
+          //   userId={user.id} userName={user.name} userEmail={user.email}
+          //   userAdress={user.address} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />)
 
-            return <UserCompCopy key={user.id}
-              user={user} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />
-          })
+          return <UserCompCopy key={user.id}
+            user={user} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />
+        })
 
       }
     </div>
