@@ -16,10 +16,6 @@ function UserCompCopy({ user, callback })
   
   const [updatedUser, setUpdatedUser] = useState(user);
 
-  const [updatedName, setUpdatedName] = useState([]);
-  const [updatedEmail, setUpdatedEmail] = useState([]);
-  const [updatedAdress, setUpdatedAdress] = useState([]);
-
 
   console.log("first value of updated users", updatedUser);
 
@@ -44,7 +40,6 @@ function UserCompCopy({ user, callback })
       else {
         setUncompleted(false);
       }
-      // console.log(`todos: ${user.id}}`, {todos}, uncompleted)
     };
     getUncompletedTask();
 
@@ -52,26 +47,11 @@ function UserCompCopy({ user, callback })
 
   //just for test, to see the data on the console log
   // console.log(updatedName, updatedEmail, updatedAdress)
-  console.log(updatedUser);
+  console.log("second update user log", updatedUser);
 
-  const handleUpdateUser = () => {
-    console.log("test")
-    callback({...updatedUser})
-  };
-
-  // useEffect(() => {
-  //   setUpdatedUser({...userAdress})
-  // }, [userAdress]) 
-
-
-
-  // const handleAddress = (e) => {
-  //   console.log(updatedUser)
-  //   setUpdatedUser({ ...updatedUser, address: { ...updatedUser.address, zipcode: e.target.value } })
-  // }
 
   return (
-    // <div style= {{ border: '1px solid red'}}>
+
     <div style={{ border: uncompleted ? '1px solid red' : '1px solid green', width: "90%", margin: "2%" }}>
       ID: {user.id} <br />
 
@@ -93,7 +73,7 @@ function UserCompCopy({ user, callback })
         Zip Code <input type="text" defaultValue={user.address.zipcode} onChange={(e) => setUpdatedUser({...updatedUser, address: {...updatedUser.address, zipcode: e.target.value}})} /> <br />
       </div>}
 
-      <button onClick={handleUpdateUser}>Update</button>
+      <button onClick={() =>callback({...updatedUser})}>Update</button>
       &nbsp;
       <button>Delete</button>
 

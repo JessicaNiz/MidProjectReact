@@ -79,7 +79,7 @@ function App() {
           //   userAdress={user.address} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />)
 
           return <UserCompCopy key={user.id}
-            user={user} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />
+            user={user} callback={getUpdatedUserFromChild} />
         })
 
       }
