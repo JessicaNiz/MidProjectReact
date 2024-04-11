@@ -3,34 +3,27 @@ import { getAllUsers } from "./utils"
 
 import axios from "axios"
 
-
 function App() {
   // const [originalUsers, setOriginalUsers] = useState([])
   const [users, setUsers] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const[usersData, setUsersData]=useState([]);
 
+  //for every render will fecth the users data from the server
 
-//for every render will fecth the users data from the server
-  useEffect(() => {
-    const fetchUsers = async () => {
-      const { data } = await getAllUsers();
-      // setOriginalUsers(data);
-      setUsers(data);
-      console.log("jen ai marre",data.id);
-      const useData = user.map(user => ({
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        address: user.address
+  const fetchUsers = async () => {
+    const { usersArray } = await getAllUsers();
+    // prune users attributes
+    const myUsersArray = usersArray.map(user => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      address: user.address
     }));
-    setUsersData(useData);
-      console.log({ data });
-      console.log("userData", usersData)
-    };
-    fetchUsers();
 
-  }, [])
+    setUsers(myUsersArray);
+  };
+
+  useEffect(() => { fetchUsers(); }, [])
 
 
   const handleChange = (e) => {
@@ -50,17 +43,11 @@ function App() {
   // };
 
 
-// //console log users data for very change to users
-//   useEffect(() => {
-//     console.log("users",users);
-//     const usersData = users.map(user => ({
-//       id: user.id,
-//       name: user.name,
-//       email: user.email,
-//       address: user.address
-//     }));
-//     console.log("print userData", usersData);
-//   }, [users])
+  // //console log users data for very change to users
+  //   useEffect(() => {
+  //     console.log("users",users);
+  //     console.log("print userData", usersData);
+  //   }, [users])
 
 
 
@@ -82,17 +69,23 @@ function App() {
       <button>Add</button>
 
       {
+
+
         // users.map((user) => <UserComp key={user.id} user={user} />)
-        usersData.filter(user =>
-          usersData.name.toLowerCase().includes(searchText.toLowerCase()) ||
-          usersData.email.toLowerCase().includes(searchText.toLowerCase())).map((user) =>
+        users.filter(user => 
+          user.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          user.email.toLowerCase().includes(searchText.toLowerCase())
+          ).map((user) => {
+
             // <UserComp key={user.id}
 
             //   userId={user.id} userName={user.name} userEmail={user.email}
             //   userAdress={user.address} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />)
 
-              <UserCompCopy key={user.id}
-              user={user} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />)
+            return <UserCompCopy key={user.id}
+              user={user} callback={(childvalue) => getUpdatedUserFromChild(childvalue)} />
+          })
+
       }
     </div>
   );
