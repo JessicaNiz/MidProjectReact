@@ -16,6 +16,8 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
   
   const [updatedUser, setUpdatedUser] = useState(user);
 
+  const [userDivClicked, setUserDivClicked] = useState(false);
+
 
   console.log("first value of updated users", updatedUser);
 
@@ -52,7 +54,8 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
 
   return (
 
-    <div style={{ border: uncompleted ? '1px solid red' : '1px solid green', width: "90%", margin: "2%" }}>
+    <div style={{ border: uncompleted ? '2px solid red' : '1px solid green', width: "90%", margin: "2%" , backgroundColor:userDivClicked ? "orange":"white"}} onClick={() => setUserDivClicked(true)}>
+      {/* <div onClick={console.log("i clicked")} style={{backgroundColor:"white"}}> */}
       ID: {user.id} <br />
 
 
