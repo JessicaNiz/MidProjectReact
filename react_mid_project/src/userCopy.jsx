@@ -4,6 +4,7 @@ import "./project.css";
 
 import TodosComp from "./todos";
 import { all } from "axios";
+import axios from "axios";
 
 
 function UserCompCopy({ user, callbackUpdate, callbackDelete }) 
@@ -51,22 +52,28 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
   // console.log(updatedName, updatedEmail, updatedAdress)
   console.log("second update user log", updatedUser);
 
+  const getUpdatedTodosFromChild = async (childValue) => {
+    console.log("getUpdatedTodosFromChild")
+    setTodos(childValue)
+    const { data } = await axios.put(`https://jsonplaceholder.typicode.com/users/${user.id}/todos`, childValue)
+    console.log("update todo server response", data)
+  }
 
   return (
-
-    <div style={{ border: uncompleted ? '2px solid red' : '1px solid green', width: "90%", margin: "2%" , backgroundColor:userDivClicked ? "orange":"white"}} onClick={() => setUserDivClicked(true)}>
+    <div style={{display:"flex", height:"fit-content"}}>
+    <div style={{width:"100%", border: uncompleted ? '2px solid red' : '2px solid green', margin: "2%", backgroundColor:userDivClicked ? "#f9ccac":"white", height:"fit-content"}}>
       {/* <div onClick={console.log("i clicked")} style={{backgroundColor:"white"}}> */}
-      ID: {user.id} <br />
+      <p onClick={() => setUserDivClicked(!userDivClicked)}> ID: {user.id} </p> <br />
 
 
-      Name: <input type="text" defaultValue={user.name} onChange={(e) => setUpdatedUser({ ...updatedUser, name: e.target.value })} /> <br />
+      Name: <input type="text" defaultValue={user.name}  onChange={(e) => setUpdatedUser({ ...updatedUser, name: e.target.value})} /> <br />
       Email: <input type="text" defaultValue={user.email} onChange={(e) => setUpdatedUser({ ...updatedUser, email: e.target.value })} /> <br />
       uncompleted?: {uncompleted.toString()} <br />
 
       <button onMouseOver={() => setOtherDataExist(true)} onClick={() => setOtherDataExist(false)}>Other Data</button>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      {otherDataExist && <div style={{ border: '1px solid black', width: "90%" }}>
+      {otherDataExist && <div style={{ backgroundColor:"#e0e2e4", borderRadius:"25px",border: '1px solid black', margin: "2%"}}>
         {/* Street: <input type="text" defaultValue={userAdress.street} onChange={(e) => setUpdatedAdress({...updatedAdress,street: e.target.value})} /> <br />
         City: <input type="text" defaultValue={userAdress.city} onChange={(e) => setUpdatedAdress({...updatedAdress,city: e.target.value})} /> <br />
         Zip Code <input type="text" defaultValue={userAdress.zipcode} onChange={(e) => setUpdatedAdress({...updatedAdress,zipcode: e.target.value})} /> <br /> */}
@@ -79,11 +86,15 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
       <button onClick={() =>callbackUpdate({...updatedUser})}>Update</button>
       &nbsp;
       <button onClick={() =>callbackDelete(user.id)}>Delete</button>
-
-
-
-      {/* < TodosComp todos={todos}/> */}
     </div>
+    {userDivClicked && 
+    ( 
+    <div>
+      <TodosComp userId={user.id} todos={todos} callbackTodosUpdate={getUpdatedTodosFromChild}/>
+    </div>
+    )
+    }
+  </div>
   );
 };
 

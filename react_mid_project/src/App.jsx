@@ -68,14 +68,14 @@ function App() {
   }
 
   return (
-    <div style={{ border: '1px solid black', borderRadius: '50px', alignItems: 'center', width: "150%" }}>
+    <>
+    <div style={{ border: '1px solid black', borderRadius: '50px', alignItems: 'center', width: "50%" , padding: "20px"}}>
+    
       Search&nbsp;&nbsp;  <input type="text" onChange={handleChange} />
       &nbsp;&nbsp;
       <button>Add</button>
 
       {
-
-
         // users.map((user) => <UserComp key={user.id} user={user} />)
         users.filter(user =>
           user.name.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -88,6 +88,7 @@ function App() {
 
       }
     </div>
+    </>
   );
 };
 
