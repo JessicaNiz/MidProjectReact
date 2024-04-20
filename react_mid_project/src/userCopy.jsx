@@ -52,11 +52,15 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
   // console.log(updatedName, updatedEmail, updatedAdress)
   console.log("second update user log", updatedUser);
 
-  const getUpdatedTodosFromChild = async (childValue) => {
+  const getUpdatedTodosFromChild = (childValue) => {
     console.log("getUpdatedTodosFromChild")
     setTodos(childValue)
-    const { data } = await axios.put(`https://jsonplaceholder.typicode.com/users/${user.id}/todos`, childValue)
-    console.log("update todo server response", data)
+    // const { data } = await axios.put(`https://jsonplaceholder.typicode.com/users/${user.id}/todos`, childValue)
+    // console.log("update todo server response", data)
+  }
+
+  const getNewTodosFromChild = (newTodo) => {
+    setTodos([...todos, newTodo]);
   }
 
   return (
@@ -90,7 +94,8 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
     {userDivClicked && 
     ( 
     <div>
-      <TodosComp userId={user.id} todos={todos} callbackTodosUpdate={getUpdatedTodosFromChild}/>
+      <TodosComp userId={user.id} todos={todos} callbackTodosUpdate={getUpdatedTodosFromChild}
+      callbackNewTodo={getNewTodosFromChild}/>
     </div>
     )
     }

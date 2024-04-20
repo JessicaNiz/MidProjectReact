@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getUserTodos } from "./utils";
 
 
-function TodosComp({userId, todos, callbackTodosUpdate }) {
+function TodosComp({userId, todos, callbackTodosUpdate,callbackNewTodo }) {
 
 const [updatedTodos, setUpdatedTodos] = useState(todos);
 const [addTodoNotClicked, setAddTodoNotClicked] =useState('true')
@@ -24,8 +24,15 @@ console.log("newTodo to see first define", newTodos)
     callbackTodosUpdate([...todosCopy]);
   }
 
+  const handleAddTodo= (newTodo) => {
+    callbackNewTodo(newTodo);
+    setAddTodoNotClicked(true);
+  }
+
+
   console.log("Todos:", todos);
   console.log("add Todo clicked", addTodoNotClicked)
+
   return (
     <>
     Todos- User {userId} &nbsp;&nbsp;&nbsp; 
@@ -51,7 +58,7 @@ console.log("newTodo to see first define", newTodos)
         Title: <input type="text" onChange={(e) => setnewTodos({ ...newTodos, title: e.target.value })} /> <br />
         <button onClick={()=> setAddTodoNotClicked(true)}>Cancel</button>
         &nbsp;&nbsp;
-        <button>Add</button>
+        <button onClick={() =>handleAddTodo(newTodos)}>Add</button>
       </div>
     
     }
