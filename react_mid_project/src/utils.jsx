@@ -12,4 +12,8 @@ const getUserTodos = async (userId) => {
     return await axios.get(`${todosUrl}?userId=${userId}`);
 }
 
-export { getAllUsers, getUserTodos };
+const getUserPosts = async(userId) => {
+    return await axios.get(`${postsUrl}?userId=${userId}`)
+}
+
+export { getAllUsers, getUserTodos, getUserPosts };

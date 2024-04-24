@@ -8,7 +8,7 @@ const [updatedTodos, setUpdatedTodos] = useState(todos);
 const [addTodoNotClicked, setAddTodoNotClicked] =useState('true')
 const [newTodos, setnewTodos] = useState({
   userId: userId,
-  id: '',
+  id: '', /* id: userId*100+todos.length*/
   title:'',
   completed:false
 });
@@ -35,14 +35,14 @@ console.log("newTodo to see first define", newTodos)
 
   return (
     <>
-    Todos- User {userId} &nbsp;&nbsp;&nbsp; 
-    {<button onClick={() =>setAddTodoNotClicked(false)}>Add</button>}
-    <div style={{border: '1px solid black', alignItems: 'center'}}> 
     { addTodoNotClicked ? 
     <>
+    Todos- User {userId} &nbsp;&nbsp;&nbsp; 
+    {<button onClick={() =>setAddTodoNotClicked(false)}>Add</button>}
+    <div style={{border: '1.5px solid black', alignItems: 'center'}}> 
       {todos.map((todo) => {
         return (
-          <div style={{ border: "1px solid purple", padding:"10px", margin:"10px" }}>
+          <div style={{ border: "1.5px solid purple", padding:"10px", margin:"10px" }}>
             Title: {todo.title} <br />
             Completed: {todo.completed.toString()}
             &nbsp;&nbsp; &nbsp;&nbsp;
@@ -52,17 +52,22 @@ console.log("newTodo to see first define", newTodos)
         );
       }
       )}
+      </div>
       </>
       :
-      <div style={{}}> 
-        Title: <input type="text" onChange={(e) => setnewTodos({ ...newTodos, title: e.target.value })} /> <br />
+      <>
+      New Todo - User {userId}
+      <div style={{border: '1px solid black', alignItems: 'center'}}> 
+      <br/>
+        Title: <input type="text" onChange={(e) => setnewTodos({ ...newTodos, title: e.target.value,  id: userId*100+todos.length })} /> <br /> <br />
         <button onClick={()=> setAddTodoNotClicked(true)}>Cancel</button>
         &nbsp;&nbsp;
         <button onClick={() =>handleAddTodo(newTodos)}>Add</button>
       </div>
-    
+      <br />
+    </>
     }
-    </div>
+  
     </>
   );
 };

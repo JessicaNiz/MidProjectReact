@@ -74,8 +74,8 @@ function UserComp({ userId, userName, userEmail, userAdress, callback })
   }
 
   return (
-    // <div style= {{ border: '1px solid red'}}>
-    <div style={{ border: uncompleted ? '1px solid red' : '1px solid green', width: "90%", margin: "2%" }}>
+  
+    <div style={{ border: uncompleted ? '1px solid red' : '1px solid green', width: "100%", margin: "2%" }}>
       ID: {userId} <br />
 
 

@@ -5,6 +5,7 @@ import "./project.css";
 import TodosComp from "./todos";
 import { all } from "axios";
 import axios from "axios";
+import PostsComp from "./posts";
 
 
 function UserCompCopy({ user, callbackUpdate, callbackDelete }) 
@@ -96,7 +97,10 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
     <div>
       <TodosComp userId={user.id} todos={todos} callbackTodosUpdate={getUpdatedTodosFromChild}
       callbackNewTodo={getNewTodosFromChild}/>
+      <br /> <br />
+      <PostsComp userId={user.id} />
     </div>
+
     )
     }
   </div>

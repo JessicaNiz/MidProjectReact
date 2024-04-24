@@ -69,7 +69,7 @@ function App() {
 
   return (
     <>
-    <div style={{ border: '1px solid black', borderRadius: '50px', alignItems: 'center', width: "50%" , padding: "20px"}}>
+    <div style={{ border: '1.5px solid black', borderRadius: '50px', alignItems: 'center', width: "60%" , padding: "20px"}}>
     
       Search&nbsp;&nbsp;  <input type="text" onChange={handleChange} />
       &nbsp;&nbsp;
