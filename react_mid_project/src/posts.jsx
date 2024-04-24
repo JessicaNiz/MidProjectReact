@@ -14,6 +14,7 @@ function PostsComp({userId}) {
     body:''
   });
 
+  console.log("print users from post component", users)
   useEffect(() => {
   const fetchPosts = async () => {
     const { data } = await getUserPosts(userId);

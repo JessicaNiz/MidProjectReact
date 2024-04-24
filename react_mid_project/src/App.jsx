@@ -3,14 +3,15 @@ import { getAllUsers } from "./utils"
 
 import axios from "axios"
 import UserCompCopy from "./userCopy";
+import NewUserComp from "./newUser";
 
 function App() {
   // const [originalUsers, setOriginalUsers] = useState([])
   const [users, setUsers] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [showAddUser, setShowAddUser] = useState(false);
 
   //for every render will fecth the users data from the server
-
   useEffect(() => {
   const fetchUsers = async () => {
     const { data } = await getAllUsers();
@@ -43,6 +44,8 @@ function App() {
   //console log users data for very change to users
     useEffect(() => {
       console.log("users",users);
+      console.log("users lenght from app comp", users.length)
+
     }, [users])
 
 
@@ -67,14 +70,23 @@ function App() {
     console.log("delete user server response", data)
   }
 
+  const cancelAddUser=() => {
+    setShowAddUser(false);
+  };
+
+  const addNewUser = (newValue) => {
+    setUsers([...users, newValue]);
+    setShowAddUser(false);
+  }
+
+
   return (
     <>
-    <div style={{ border: '1.5px solid black', borderRadius: '50px', alignItems: 'center', width: "60%" , padding: "20px"}}>
-    
+    <div style={{ display:"flex", height:"fit-content", border: '1.5px solid black', borderRadius: '50px', width: "60%" , padding: "20px"}}>
+    <div>
       Search&nbsp;&nbsp;  <input type="text" onChange={handleChange} />
       &nbsp;&nbsp;
-      <button>Add</button>
-
+      <button onClick={()=> setShowAddUser(true)}>Add</button>
       {
         // users.map((user) => <UserComp key={user.id} user={user} />)
         users.filter(user =>
@@ -87,6 +99,17 @@ function App() {
         })
 
       }
+      </div>
+
+    <div >
+    {
+      showAddUser && <div style={{float: "right"}}>
+        <br /> <br /> <br /> <br />
+        Add New User
+        <NewUserComp users={users} callbackCancelNewUser={cancelAddUser} callbackAddNewUser={addNewUser}/>
+      </div>
+    }
+    </div>
     </div>
     </>
   );
