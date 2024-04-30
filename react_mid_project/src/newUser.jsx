@@ -17,15 +17,15 @@ console.log("print users from new user component", users)
 console.log("users lenght", users.length)
 
   return (
-  <div style={{border:"1.5px solide black"}}>
+  <div style={{border:"1.5px solid black", padding:"20px"}}>
     <br />
-    Name: <input type='text' onChange={(e) => setNewUser({...newUser, id: users.length+1, name:e.target.value})}/>
+    Name: <input  type='text' onChange={(e) => setNewUser({...newUser, id: users.length+1, name:e.target.value})}/>
     <br/><br />
-    Email:<input type='text' onChange={(e) => setNewUser({...newUser, email:e.target.value})}/>
+    Email: <input type='text' onChange={(e) => setNewUser({...newUser, email:e.target.value})}/>
     <br /><br />
-    <button onClick={callbackCancelNewUser}>Cancel</button>
-    &nbsp;&nbsp;
-    <button onClick={() =>callbackAddNewUser({...newUser})}>Add</button>
+    <button className="yellowButton" onClick={callbackCancelNewUser}>Cancel</button>
+    
+    <button className="yellowButton" onClick={() =>callbackAddNewUser({...newUser})}>Add</button>
   </div>
   
 

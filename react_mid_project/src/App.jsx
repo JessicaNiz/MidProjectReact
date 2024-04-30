@@ -82,11 +82,14 @@ function App() {
 
   return (
     <>
-    <div style={{ display:"flex", height:"fit-content", border: '1.5px solid black', borderRadius: '50px', width: "60%" , padding: "20px"}}>
-    <div>
+    <div >
+   {/* </div> <div style={{ display:"flex", height:"fit-content", border: '1.5px solid black', borderRadius: '50px', width: "60%" , padding: "20px"}}> */}
+    <div className="roundedCard">
+      <div style={{margin:"5px", padding:"5px"}}>
       Search&nbsp;&nbsp;  <input type="text" onChange={handleChange} />
-      &nbsp;&nbsp;
-      <button onClick={()=> setShowAddUser(true)}>Add</button>
+      
+      <button className="yellowButton" onClick={()=> setShowAddUser(true)}>Add</button>
+      </div>
       {
         // users.map((user) => <UserComp key={user.id} user={user} />)
         users.filter(user =>
@@ -103,7 +106,7 @@ function App() {
 
     <div >
     {
-      showAddUser && <div style={{float: "right"}}>
+      showAddUser && <div style={{position:"absolute", transform:"translateX(400px) translateY(-1900px"}}>
         <br /> <br /> <br /> <br />
         Add New User
         <NewUserComp users={users} callbackCancelNewUser={cancelAddUser} callbackAddNewUser={addNewUser}/>

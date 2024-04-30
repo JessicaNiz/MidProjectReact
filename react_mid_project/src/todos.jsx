@@ -8,16 +8,25 @@ const [updatedTodos, setUpdatedTodos] = useState(todos);
 const [addTodoNotClicked, setAddTodoNotClicked] =useState('true')
 const [newTodos, setnewTodos] = useState({
   userId: userId,
-  id: '', /* id: userId*100+todos.length*/
+  id:'',
   title:'',
   completed:false
 });
 
+
+useEffect(() => {
+  setUpdatedTodos(todos)
+  console.log("updatedTodos", todos)
+}, [todos]);
+
 console.log("newTodo to see first define", newTodos)
   const handleMarkCompleted =(id) => {
-    console.log("handle mark completed test")
+    console.log("handle mark completed test ID", id)
+    console.log("handle mark completed updatedTodos", updatedTodos)
     const todosCopy = [...updatedTodos]
+    console.log("handle mark completed test todosCopy", todosCopy);
     const index = todosCopy.findIndex(todo => todo.id === id)
+    console.log("handleMarkCompleted index value", index);
     todosCopy[index] = { ...todosCopy[index], completed: true };
     setUpdatedTodos(todosCopy)
     console.log("todosCopy from handleMarckCompleted",todosCopy)
@@ -37,8 +46,9 @@ console.log("newTodo to see first define", newTodos)
     <>
     { addTodoNotClicked ? 
     <>
+
     Todos- User {userId} &nbsp;&nbsp;&nbsp; 
-    {<button onClick={() =>setAddTodoNotClicked(false)}>Add</button>}
+    {<button className="yellowButton" onClick={() =>setAddTodoNotClicked(false)}>Add</button>}
     <div style={{border: '1.5px solid black', alignItems: 'center'}}> 
       {todos.map((todo) => {
         return (
@@ -46,7 +56,7 @@ console.log("newTodo to see first define", newTodos)
             Title: {todo.title} <br />
             Completed: {todo.completed.toString()}
             &nbsp;&nbsp; &nbsp;&nbsp;
-            {!todo.completed && <button onClick={() => handleMarkCompleted(todo.id)} >Mark Completed</button>}
+            {!todo.completed && <button className="yellowButton" onClick={() => handleMarkCompleted(todo.id)} >Mark Completed</button>}
             {/* onChange={(e) => setUpdatedUser({ ...updatedUser, name: e.target.value})} */}
           </div>
         );
@@ -59,7 +69,7 @@ console.log("newTodo to see first define", newTodos)
       New Todo - User {userId}
       <div style={{border: '1px solid black', alignItems: 'center'}}> 
       <br/>
-        Title: <input type="text" onChange={(e) => setnewTodos({ ...newTodos, title: e.target.value,  id: userId*100+todos.length })} /> <br /> <br />
+        Title: <input type="text" onChange={(e) => setnewTodos({ ...newTodos, title: e.target.value ,id: userId*100+todos.length })} /> <br /> <br />
         <button onClick={()=> setAddTodoNotClicked(true)}>Cancel</button>
         &nbsp;&nbsp;
         <button onClick={() =>handleAddTodo(newTodos)}>Add</button>

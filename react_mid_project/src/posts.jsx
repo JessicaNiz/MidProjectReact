@@ -5,8 +5,8 @@ import { getUserPosts } from "./utils";
 function PostsComp({userId}) {
 
   const [posts, setPosts] = useState([]);
-  const [showPostsList, setShowPostsList] = useState('true')
-  const [showAddPost, setShowAddPost] = useState("false")
+  const [showPostsList, setShowPostsList] = useState(true)
+  const [showAddPost, setShowAddPost] = useState(false)
   const [newPost, setNewPost] = useState({
     userId: userId,
     id:'',
@@ -14,7 +14,7 @@ function PostsComp({userId}) {
     body:''
   });
 
-  console.log("print users from post component", users)
+
   useEffect(() => {
   const fetchPosts = async () => {
     const { data } = await getUserPosts(userId);
@@ -51,7 +51,7 @@ function PostsComp({userId}) {
     { showPostsList &&
     <>
     Posts- User {userId} &nbsp;&nbsp;&nbsp; 
-    {<button onClick={changePostScreen}>Add</button>}
+    {<button className="yellowButton" onClick={changePostScreen}>Add</button>}
     <div style={{border: '1.5px solid black', alignItems: 'center'}}> 
       {posts.map((post) => {
         return (
@@ -62,6 +62,7 @@ function PostsComp({userId}) {
         );
       }
       )}
+
       </div>
       </>
       }

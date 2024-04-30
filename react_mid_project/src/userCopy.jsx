@@ -54,47 +54,52 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
   console.log("second update user log", updatedUser);
 
   const getUpdatedTodosFromChild = (childValue) => {
-    console.log("getUpdatedTodosFromChild")
+    console.log("getUpdatedTodosFromChild",childValue);
     setTodos(childValue)
     // const { data } = await axios.put(`https://jsonplaceholder.typicode.com/users/${user.id}/todos`, childValue)
     // console.log("update todo server response", data)
-  }
+  };
 
   const getNewTodosFromChild = (newTodo) => {
     setTodos([...todos, newTodo]);
-  }
+    console.log("getNewTodosFromChild",newTodo, todos)
+    
+  };
 
+  console.log("again Todos, to see the new updated Todos", todos)
   return (
-    <div style={{display:"flex", height:"fit-content"}}>
-    <div style={{width:"100%", border: uncompleted ? '2px solid red' : '2px solid green', margin: "2%", backgroundColor:userDivClicked ? "#f9ccac":"white", height:"fit-content"}}>
+    <div style={{display:'flex'}}>
+    {/* <div style={{display:"flex", height:"fit-content"}}> */}
+    <div style={{height:'fit-content', margin: "5px", padding: "10px" , border: uncompleted ? '2px solid red' : '2px solid green', backgroundColor:userDivClicked ? "#f9ccac":"white"}}>
+    {/* <div style={{width:"100%", border: uncompleted ? '2px solid red' : '2px solid green', margin: "2%", backgroundColor:userDivClicked ? "#f9ccac":"white", height:"fit-content"}}> */}
       {/* <div onClick={console.log("i clicked")} style={{backgroundColor:"white"}}> */}
       <p onClick={() => setUserDivClicked(!userDivClicked)}> ID: {user.id} </p> <br />
 
 
       Name: <input type="text" defaultValue={user.name}  onChange={(e) => setUpdatedUser({ ...updatedUser, name: e.target.value})} /> <br />
       Email: <input type="text" defaultValue={user.email} onChange={(e) => setUpdatedUser({ ...updatedUser, email: e.target.value })} /> <br />
-      uncompleted?: {uncompleted.toString()} <br />
-
+      {/* uncompleted?: {uncompleted.toString()} <br /> */}
+      <br />
       <button onMouseOver={() => setOtherDataExist(true)} onClick={() => setOtherDataExist(false)}>Other Data</button>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
 
-      {otherDataExist && <div style={{ backgroundColor:"#e0e2e4", borderRadius:"25px",border: '1px solid black', margin: "2%"}}>
+      {otherDataExist && <div style={{ backgroundColor:"#e0e2e4", borderRadius:"25px",border: '1px solid black', margin:'16px', padding:'16px'}}>
         {/* Street: <input type="text" defaultValue={userAdress.street} onChange={(e) => setUpdatedAdress({...updatedAdress,street: e.target.value})} /> <br />
         City: <input type="text" defaultValue={userAdress.city} onChange={(e) => setUpdatedAdress({...updatedAdress,city: e.target.value})} /> <br />
         Zip Code <input type="text" defaultValue={userAdress.zipcode} onChange={(e) => setUpdatedAdress({...updatedAdress,zipcode: e.target.value})} /> <br /> */}
 
-        Street: <input type="text" defaultValue={user.address.street} onChange={(e) => setUpdatedUser({ ...updatedUser, address: { ...updatedUser.address, street: e.target.value } })} /> <br />
-        City: <input type="text" defaultValue={user.address.city} onChange={(e) => setUpdatedUser({ ...updatedUser, address: { ...updatedUser.address, city: e.target.value } })} /> <br />
-        Zip Code <input type="text" defaultValue={user.address.zipcode} onChange={(e) => setUpdatedUser({...updatedUser, address: {...updatedUser.address, zipcode: e.target.value}})} /> <br />
+        Street:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" defaultValue={user.address.street} onChange={(e) => setUpdatedUser({ ...updatedUser, address: { ...updatedUser.address, street: e.target.value } })} /> <br />
+        City:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" defaultValue={user.address.city} onChange={(e) => setUpdatedUser({ ...updatedUser, address: { ...updatedUser.address, city: e.target.value } })} /> <br />
+        Zip Code: <input type="text" defaultValue={user.address.zipcode} onChange={(e) => setUpdatedUser({...updatedUser, address: {...updatedUser.address, zipcode: e.target.value}})} />
       </div>}
 
-      <button onClick={() =>callbackUpdate({...updatedUser})}>Update</button>
-      &nbsp;
-      <button onClick={() =>callbackDelete(user.id)}>Delete</button>
+      <button className='yellowButton' onClick={() =>callbackUpdate({...updatedUser})}>Update</button>
+     
+      <button className='yellowButton' onClick={() =>callbackDelete(user.id)}>Delete</button>
     </div>
     {userDivClicked && 
     ( 
-    <div>
+    <div style={{position:"absolute", transform:"translateX(370px)", width:'350px'}}>
       <TodosComp userId={user.id} todos={todos} callbackTodosUpdate={getUpdatedTodosFromChild}
       callbackNewTodo={getNewTodosFromChild}/>
       <br /> <br />
