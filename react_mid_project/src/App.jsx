@@ -104,9 +104,10 @@ function App() {
       }
       </div>
 
-    <div >
+    <div style={{position:"fixed", bottom:'50%', right:'45%'}} >
     {
-      showAddUser && <div style={{position:"absolute", transform:"translateX(400px) translateY(-1900px"}}>
+      showAddUser && <div>  
+        {/* style={{position:"absolute", transform:"translateX(400px) translateY(-1900px"}}>  */}
         <br /> <br /> <br /> <br />
         Add New User
         <NewUserComp users={users} callbackCancelNewUser={cancelAddUser} callbackAddNewUser={addNewUser}/>

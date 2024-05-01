@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUserPosts } from "./utils";
+import {v4 as uuidv4 } from "uuid";
 
 
 function NewUserComp({users, callbackCancelNewUser, callbackAddNewUser}) {
@@ -19,7 +19,7 @@ console.log("users lenght", users.length)
   return (
   <div style={{border:"1.5px solid black", padding:"20px"}}>
     <br />
-    Name: <input  type='text' onChange={(e) => setNewUser({...newUser, id: users.length+1, name:e.target.value})}/>
+    Name: <input  type='text' onChange={(e) => setNewUser({...newUser, id: users.length+11, /*uuidv4(),*/ name:e.target.value})}/>
     <br/><br />
     Email: <input type='text' onChange={(e) => setNewUser({...newUser, email:e.target.value})}/>
     <br /><br />
