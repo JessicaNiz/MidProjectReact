@@ -85,7 +85,7 @@ function App() {
     <div >
    {/* </div> <div style={{ display:"flex", height:"fit-content", border: '1.5px solid black', borderRadius: '50px', width: "60%" , padding: "20px"}}> */}
     <div className="roundedCard">
-      <div style={{ cursor:"pointer",  margin:"5px", padding:"5px"}}>
+      <div style={{margin:"5px", padding:"5px"}}>
       Search&nbsp;&nbsp;  <input type="text" onChange={handleChange} />
       
       <button className="yellowButton" onClick={()=> setShowAddUser(true)}>Add</button>
