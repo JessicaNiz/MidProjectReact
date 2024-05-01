@@ -73,7 +73,7 @@ function UserCompCopy({ user, callbackUpdate, callbackDelete })
     <div style={{height:'fit-content', margin: "5px", padding: "10px" , border: uncompleted ? '2px solid red' : '2px solid green', backgroundColor:userDivClicked ? "#f9ccac":"white"}}>
     {/* <div style={{width:"100%", border: uncompleted ? '2px solid red' : '2px solid green', margin: "2%", backgroundColor:userDivClicked ? "#f9ccac":"white", height:"fit-content"}}> */}
       {/* <div onClick={console.log("i clicked")} style={{backgroundColor:"white"}}> */}
-      <p onClick={() => setUserDivClicked(!userDivClicked)}> ID: {user.id} </p> <br />
+      <p style={{cursor:"pointer"}} onClick={() => setUserDivClicked(!userDivClicked)}> ID: {user.id} </p> <br />
 
 
       Name: <input type="text" defaultValue={user.name}  onChange={(e) => setUpdatedUser({ ...updatedUser, name: e.target.value})} /> <br />
