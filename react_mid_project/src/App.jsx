@@ -13,6 +13,7 @@ function App() {
 
   //for every render will fecth the users data from the server
   useEffect(() => {
+ 
   const fetchUsers = async () => {
     const { data } = await getAllUsers();
     console.log("data from server", data);

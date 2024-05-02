@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUserTodos } from "./utils";
-
+import {v4 as uuidv4 } from "uuid";
 
 function TodosComp({userId, todos, callbackTodosUpdate,callbackNewTodo }) {
 
@@ -69,7 +69,7 @@ console.log("newTodo to see first define", newTodos)
       New Todo - User {userId}
       <div style={{border: '1px solid black', alignItems: 'center'}}> 
       <br/>
-        Title: <input type="text" onChange={(e) => setnewTodos({ ...newTodos, title: e.target.value ,id: userId*100+todos.length })} /> <br /> <br />
+        Title: <input type="text" onChange={(e) => setnewTodos({ ...newTodos, title: e.target.value ,id: uuidv4() /*userId*100+todos.length*/ })} /> <br /> <br />
         <button onClick={()=> setAddTodoNotClicked(true)}>Cancel</button>
         &nbsp;&nbsp;
         <button onClick={() =>handleAddTodo(newTodos)}>Add</button>

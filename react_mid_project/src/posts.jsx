@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUserPosts } from "./utils";
+import {v4 as uuidv4 } from "uuid";
 
 
 function PostsComp({userId}) {
@@ -73,7 +74,7 @@ function PostsComp({userId}) {
       New Post - User {userId}
       <div style={{border: '1px solid black', alignItems: 'center'}}> 
       <br />
-        Title: <input type="text" onChange={(e) => setNewPost({ ...newPost,id: userId*100+posts.length, title: e.target.value })} /> <br />
+        Title: &nbsp;<input type="text" onChange={(e) => setNewPost({ ...newPost,id: uuidv4() /*userId*100+posts.length*/, title: e.target.value })} /> <br />
         Body: <input type="text" onChange={(e) => setNewPost({...newPost, body: e.target.value})} />
         <br /><br />
         <button onClick={handlePostCancel}>Cancel</button>
